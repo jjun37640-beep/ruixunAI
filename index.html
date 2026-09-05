@@ -90,7 +90,14 @@
 
         .summary-card { border: 1px solid #b39ddb; background: rgba(255, 250, 230, 0.75); }
         .risk-card { border: 1px solid #81d4fa; background: rgba(225, 245, 254, 0.75); }
-.terminology-card { border: 1px solid #DDD6FE; background: #F5F3FF; }
+.terminology-card { border: 1px solid #C4B5FD; background: #FAF5FF; }
+        /* ================= 名词解释卡片：白天模式清晰配色 ================= */
+        /* 原 .terminology-card 紫底配 text-slate-700 实际对比度不足，渲染糊在一起。
+           改用 indigo-900 正文（深紫蓝），与浅紫底形成强对比；标题仍保留品牌深紫色。 */
+        #newsDetailTerminologyText {
+            color: #312e81;          /* indigo-900，与浅紫底对比度高 */
+            font-weight: 500;        /* 略加粗，进一步提升可读性 */
+        }
         .tag, .tag-badge {
             background-color: #e8f5e9;
             color: #059669; 
@@ -185,7 +192,8 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 
-        /* 手风琴平滑展开 */
+        /* 手风琴平滑展开 —— [待清理·已弃用] 全文档中没有任何元素使用 accordion-content / accordion-inner
+           （2026-09-03 全文核对，引用数 0），与「AI 能力量化」无关，是更早版本的组件残骸 */
         .accordion-content {
             display: grid;
             grid-template-rows: 0fr;
@@ -197,12 +205,14 @@
         .accordion-inner {
             overflow: hidden;
         }
+        /* ===== [待清理·已弃用] accordion 区块结束 ===== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 工具页专属高亮状态与图标背景 */
+        /* 工具页专属高亮状态与图标背景 —— [待清理·疑似弃用] 未找到能匹配 .glass-card.expanded
+           或 .icon-gradient-bg 的元素（2026-09-03 全文核对），确认后可与本区块一同清理 */
         .glass-card.expanded {
             background: rgba(255, 255, 255, 0.85);
             box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.15);
@@ -213,6 +223,7 @@
             background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
             box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 10px rgba(0,0,0,0.05);
         }
+        /* ===== [待清理·疑似弃用] 结束 ===== */
 
         /* --- 3D 背景容器样式 --- */
         .spline-container {
@@ -278,8 +289,63 @@
         @keyframes spin1 { 0% { transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg); } 100% { transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg); } }
         @keyframes spin2 { 0% { transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg); } 100% { transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg); } }
         @keyframes spin3 { 0% { transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg); } 100% { transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg); } }
+
+        /* ================= AI 能力映射 4 卡片模块：暗色模式适配 ================= */
+        body.dark .ai-cap-card {
+            background-color: rgba(30, 30, 35, 0.55) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+        }
+        body.dark .ai-cap-card:hover {
+            background-color: rgba(40, 40, 48, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.18) !important;
+        }
+        body.dark .ai-cap-pill {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            color: #cbd5e1 !important;
+        }
+        body.dark .ai-cap-divider {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+        body.dark .ai-cap-header-chip {
+            background-color: rgba(255, 255, 255, 0.06) !important;
+            color: #cbd5e1 !important;
+        }
+        /* 4 个彩色小标签（静态记忆库 / 因果律引擎 / 感官吞吐量 / 动态控制中枢）
+           在暗色下保留品牌色但适当加深底色，保证文字可读 */
+        body.dark .ai-cap-card .bg-cyan-50 {
+            background-color: rgba(34, 211, 238, 0.15) !important;
+        }
+        body.dark .ai-cap-card .text-cyan-700 {
+            color: #67e8f9 !important;
+        }
+        body.dark .ai-cap-card .bg-purple-50 {
+            background-color: rgba(168, 85, 247, 0.15) !important;
+        }
+        body.dark .ai-cap-card .text-purple-700 {
+            color: #d8b4fe !important;
+        }
+        body.dark .ai-cap-card .bg-emerald-50 {
+            background-color: rgba(16, 185, 129, 0.15) !important;
+        }
+        body.dark .ai-cap-card .text-emerald-700 {
+            color: #6ee7b7 !important;
+        }
+        body.dark .ai-cap-card .bg-amber-50 {
+            background-color: rgba(245, 158, 11, 0.15) !important;
+        }
+        body.dark .ai-cap-card .text-amber-700 {
+            color: #fcd34d !important;
+        }
+
         [x-cloak] { display: none !important; }
-                /* AI能力量化 - 刻度尺组件样式 */
+        /* ==========================================================================
+           [待清理·已弃用] 以下为「AI 能力量化」刻度尺组件专属样式（共 95 行，至结束标记为止）
+           2026-09-03 已删除该模块的 HTML 与 JS，全文引用数为 0：
+           .ruler-node / .ruler-dimmed / #ruler-svg / .ruler-path / .ruler-dot / body.dark .ruler-*
+           确认不再复用后，可直接删除本区块（含末尾结束标记）。
+           ========================================================================== */
         .ruler-node {
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(12px);
@@ -374,6 +440,8 @@ body.dark .ruler-node.active-node::before {
         .active-path ~ .ruler-dots .ruler-dot {
             opacity: 0.9;
         }
+        /* ===== [待清理·已弃用] 量化尺样式区块结束 ===== */
+
         /* 富文本内容样式 */
         .prose h4 {
             font-size: 1rem;
@@ -707,127 +775,112 @@ body.dark .ruler-node.active-node::before {
                     </div>
                 </div>
 
-                <div class="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden" x-data="aiRuler()">
-                    <div class="absolute top-0 left-0 right-0 h-[120px] bg-gradient-to-b from-brand-blue/10 to-transparent pointer-events-none z-0"></div>
+                <!-- 控制台概览页：AI能力量化 / 传统工程评测维度 ⇄ 核心认知中枢（聚合卡片模块） -->
+                <div class="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden">
                     <div class="relative z-10">
-                        <div class="flex justify-between items-end mb-6 px-1">
-                            <div>
-                                <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">AI 能力量化</h2>
-                                <p class="text-xs text-slate-500 mt-1">剥离工程表象，将工业界测评的 8 大业务维度，降维收敛至 AI 作为硅基生命的 4 大核心认知中枢。</p>
-                            </div>
-                        </div>
-                        
-                        <div class="relative w-full overflow-x-auto custom-scrollbar pb-4" id="ruler-scroll-viewport" @scroll="drawRulerPaths()">
-                            <svg id="ruler-svg"></svg>
-                            <div class="w-full min-h-[420px] flex justify-between items-stretch relative z-10 gap-6" id="ruler-nodes-container">
-                                
-                                <div class="flex flex-col justify-between w-44 sm:w-52 space-y-3 py-2 shrink-0">
-                                    <div class="text-[10px] font-bold text-slate-400 mb-1 px-1 uppercase tracking-widest border-b border-slate-200/50 pb-1"><i class="fa-solid fa-layer-group mr-1"></i> 传统工程评测维度</div>
-                                    
-                                    <template x-for="node in leftNodes" :key="node.id">
-                                        <div :id="node.id"
-                                             class="ruler-node rounded-xl p-3 flex items-center justify-between cursor-pointer group relative overflow-visible"
-                                             :style="`--glow-color: ${node.color}`"
-                                             :class="{ 
-                                                 'active-node': activeSource === node.id || (!activeSource && activeTarget === node.targetId),
-                                                 'ruler-dimmed': isRulerDimmed(node.id, 'left')
-                                             }"
-                                             @mouseenter="hoverRulerNode(node.id, 'left')"
-                                             @mouseleave="resetRulerHover()"
-                                             @click="selectedRulerNode = node">
-                                             
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-7 h-7 rounded-lg flex items-center justify-center bg-white/60 border border-white/80 group-hover:bg-white/90 transition-colors"
-                                                     :style="`color: ${node.color}`">
-                                                    <i class="fa-solid text-xs" :class="node.icon"></i>
-                                                </div>
-                                                <span class="text-xs font-semibold text-slate-700 group-hover:text-slate-900 transition-colors" x-text="node.label"></span>
-                                            </div>
-                                            <i class="fa-solid fa-chevron-right text-[9px] opacity-0 group-hover:opacity-100 transition-opacity" :style="`color: ${node.color}`"></i>
+                        <header class="w-full mb-6">
+                            <span class="ai-cap-header-chip inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold mb-2">AI能力量化</span>
+                            <h2 class="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">传统工程评测维度 ⇄ 核心认知中枢</h2>
+                            <p class="text-xs sm:text-sm text-slate-500 mt-1">采用零连线、网格聚合卡片设计，让 2:1 的归属对应关系一目了然，无视觉杂质。</p>
+                        </header>
+
+                        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+
+                            <!-- 卡片 1：知识与表征 → aiMapKnowledge -->
+                            <button type="button" @click="currentTab = 'aiMapKnowledge'; previousTab = 'dashboard';"
+                                    class="text-left ai-cap-card bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex flex-col justify-between group relative">
+                                <span class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-cyan-600 text-xs font-medium"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                                <div>
+                                    <div class="ai-cap-divider flex items-center justify-between border-b border-slate-100 pb-3 mb-4 pr-6">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-3 h-3 rounded-full bg-cyan-500"></span>
+                                            <h3 class="text-base font-bold text-slate-900 group-hover:text-cyan-700 transition-colors">知识与表征</h3>
                                         </div>
-                                    </template>
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-700 font-medium">静态记忆库</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-relaxed mb-5">常识、事实与概念的神经网络权重压缩。</p>
                                 </div>
-
-                                <div class="flex flex-col justify-around w-56 sm:w-64 py-8 shrink-0">
-                                    <div class="text-[10px] font-bold text-slate-400 mb-4 px-1 uppercase tracking-widest border-b border-slate-200/50 pb-1 text-right"><i class="fa-solid fa-brain mr-1"></i> 核心认知中枢</div>
-
-                                    <template x-for="node in rightNodes" :key="node.id">
-                                        <div :id="node.id"
-                                             class="ruler-node rounded-2xl p-4 flex flex-col cursor-pointer group mb-6 relative overflow-visible"
-                                             :style="`--glow-color: ${node.color}`"
-                                             :class="{ 
-                                                 'active-node': activeTarget === node.id,
-                                                 'ruler-dimmed': isRulerDimmed(node.id, 'right')
-                                             }"
-                                             @mouseenter="hoverRulerNode(node.id, 'right')"
-                                             @mouseleave="resetRulerHover()"
-                                             @click="selectedRulerNode = node">
-                                            
-                                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 rounded-r-md transition-all duration-300 group-hover:h-3/4 group-hover:shadow-[0_0_10px_currentColor]"
-                                                 :style="`background-color: ${node.color}; color: ${node.color}`"></div>
-
-                                            <div class="flex items-center gap-3 mb-1 pl-2">
-                                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-base shadow-md border border-white/60"
-                                                     :style="`background: linear-gradient(135deg, ${node.color}30, ${node.color}10); color: ${node.color}; box-shadow: 0 4px 15px ${node.color}20;`">
-                                                    <i class="fa-solid" :class="node.icon"></i>
-                                                </div>
-                                                <div>
-                                                    <h3 class="text-sm font-bold text-slate-800 tracking-wide group-hover:text-slate-900 transition-colors" x-text="node.label"></h3>
-                                                    <span class="text-[9px] font-mono font-bold uppercase tracking-wider" :style="`color: ${node.color}`" x-text="node.en"></span>
-                                                </div>
-                                            </div>
-                                            <p class="text-[11px] text-slate-500 mt-1 pl-2 leading-relaxed font-medium" x-text="node.shortDesc"></p>
-                                            
-                                            <div class="absolute right-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]" :style="`color: ${node.color}`"></i>
-                                            </div>
-                                        </div>
-                                    </template>
+                                <div>
+                                    <span class="text-[11px] text-slate-400 font-semibold block mb-2.5 uppercase tracking-wider">对应传统工程维度：</span>
+                                    <div class="grid grid-cols-2 gap-2.5">
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">通用综合能力</span>
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">垂直行业能力</span>
+                                    </div>
                                 </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div x-show="selectedRulerNode" x-cloak
-                         class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0"
-                         @click.self="selectedRulerNode = null">
-                        
-                        <div class="glass-card w-full max-w-md p-8 rounded-2xl relative shadow-2xl transform transition-all border border-white/60"
-                             x-show="selectedRulerNode"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 translate-y-8 scale-95"
-                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave-end="opacity-0 translate-y-8 scale-95">
-                             
-                            <button @click="selectedRulerNode = null" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors">
-                                <i class="fa-solid fa-xmark text-xl"></i>
                             </button>
 
-                            <template x-if="selectedRulerNode">
+                            <!-- 卡片 2：推理与计算 → aiMapReasoning -->
+                            <button type="button" @click="currentTab = 'aiMapReasoning'; previousTab = 'dashboard';"
+                                    class="text-left ai-cap-card bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex flex-col justify-between group relative">
+                                <span class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-purple-600 text-xs font-medium"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                                 <div>
-                                    <div class="flex items-center gap-4 mb-5">
-                                        <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-white/80 border border-white/90 shadow-lg text-2xl"
-                                             :style="`color: ${selectedRulerNode.color}; box-shadow: 0 4px 15px ${selectedRulerNode.color}40;`">
-                                            <i class="fa-solid" :class="selectedRulerNode.icon"></i>
+                                    <div class="ai-cap-divider flex items-center justify-between border-b border-slate-100 pb-3 mb-4 pr-6">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-3 h-3 rounded-full bg-purple-500"></span>
+                                            <h3 class="text-base font-bold text-slate-900 group-hover:text-purple-700 transition-colors">推理与计算</h3>
                                         </div>
-                                        <h3 class="text-2xl font-bold text-slate-800 tracking-wide" x-text="selectedRulerNode.label"></h3>
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 font-medium">因果律引擎</span>
                                     </div>
-                                    
-                                    <div class="w-full h-px bg-gradient-to-r from-slate-200 via-slate-100 to-transparent my-5"></div>
-                                    
-                                    <p class="text-slate-600 text-sm leading-relaxed font-medium" x-text="selectedRulerNode.desc"></p>
+                                    <p class="text-xs text-slate-500 leading-relaxed mb-5">符号操作、多步逻辑推导与结构化求解。</p>
                                 </div>
-                            </template>
+                                <div>
+                                    <span class="text-[11px] text-slate-400 font-semibold block mb-2.5 uppercase tracking-wider">对应传统工程维度：</span>
+                                    <div class="grid grid-cols-2 gap-2.5">
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">逻辑与推理能力</span>
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">代码开发能力</span>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- 卡片 3：感知与交互带宽 → aiMapPerception -->
+                            <button type="button" @click="currentTab = 'aiMapPerception'; previousTab = 'dashboard';"
+                                    class="text-left ai-cap-card bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex flex-col justify-between group relative">
+                                <span class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-600 text-xs font-medium"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                                <div>
+                                    <div class="ai-cap-divider flex items-center justify-between border-b border-slate-100 pb-3 mb-4 pr-6">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                            <h3 class="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">感知与交互带宽</h3>
+                                        </div>
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium">感官吞吐量</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-relaxed mb-5">视听输入解析能力与短期工作记忆容量。</p>
+                                </div>
+                                <div>
+                                    <span class="text-[11px] text-slate-400 font-semibold block mb-2.5 uppercase tracking-wider">对应传统工程维度：</span>
+                                    <div class="grid grid-cols-2 gap-2.5">
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">多模态能力</span>
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">长上下文能力</span>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- 卡片 4：规划与执行 → aiMapPlanning -->
+                            <button type="button" @click="currentTab = 'aiMapPlanning'; previousTab = 'dashboard';"
+                                    class="text-left ai-cap-card bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex flex-col justify-between group relative">
+                                <span class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-amber-600 text-xs font-medium"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                                <div>
+                                    <div class="ai-cap-divider flex items-center justify-between border-b border-slate-100 pb-3 mb-4 pr-6">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                                            <h3 class="text-base font-bold text-slate-900 group-hover:text-amber-700 transition-colors">规划与执行</h3>
+                                        </div>
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-medium">动态控制中枢</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-relaxed mb-5">复杂目标拆解、状态机流转与工具调度。</p>
+                                </div>
+                                <div>
+                                    <span class="text-[11px] text-slate-400 font-semibold block mb-2.5 uppercase tracking-wider">对应传统工程维度：</span>
+                                    <div class="grid grid-cols-2 gap-2.5">
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">智能体能力</span>
+                                        <span class="ai-cap-pill p-3 rounded-xl bg-slate-50/80 border border-slate-200/60 text-xs font-medium text-slate-700 text-center flex items-center justify-center">安全与对齐能力</span>
+                                    </div>
+                                </div>
+                            </button>
+
                         </div>
+
+                        <p class="w-full mt-6 text-center text-xs text-slate-400">AI 能力评估架构映射表 · 模块化聚合视图</p>
                     </div>
                 </div>
             </div>
@@ -1014,7 +1067,7 @@ body.dark .ruler-node.active-node::before {
         <i class="fas fa-book text-[#4C1D95] dark:text-purple-400"></i>
         <h2 class="text-sm font-bold uppercase tracking-wider text-[#4C1D95] dark:text-purple-400">名词解释</h2>
     </div>
-    <p id="newsDetailTerminologyText" class="leading-relaxed text-[15px] text-[#000000] dark:text-gray-300 whitespace-pre-wrap font-medium"></p>
+    <p id="newsDetailTerminologyText" class="text-sm text-slate-700 dark:text-slate-300 leading-7 tracking-normal whitespace-pre-wrap font-normal"></p>
 </section>
                                                 <section id="newsDetailRisk" class="glass-card risk-card p-6 shrink-0 hidden">
                             <div class="flex items-center gap-2 mb-3">
@@ -1446,6 +1499,66 @@ body.dark .ruler-node.active-node::before {
                     <!-- 浏览记录的动态渲染容器 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="myHistoryGrid"></div>
                 </section>
+            </div>
+
+            <!-- ================= AI 能力映射：知识与表征 ================= -->
+            <div class="flex-1 overflow-y-auto rounded-2xl relative scroll-smooth pb-8 pr-1 h-full" x-show="currentTab === 'aiMapKnowledge'" x-cloak x-transition.opacity.duration.400ms>
+                <div class="flex items-center gap-4 mb-6 shrink-0 pl-2">
+                    <button @click="currentTab = 'dashboard'" class="p-2 hover:bg-white/40 rounded-full transition text-slate-600 border border-transparent hover:border-white/60 shadow-sm" title="返回全局概览">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">知识与表征 <span class="text-base font-medium text-slate-400 align-middle ml-1">· 静态记忆库</span></h1>
+                </div>
+                <div class="glass-card rounded-3xl p-12 text-center max-w-3xl mx-auto">
+                    <span class="inline-flex w-14 h-14 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-600 text-2xl mb-4"><i class="fa-solid fa-database"></i></span>
+                    <p class="text-slate-700 font-semibold">此模块界面待开发</p>
+                    <p class="text-xs text-slate-400 mt-2">提供相应的界面信息后，将在此处填充对应内容。</p>
+                </div>
+            </div>
+
+            <!-- ================= AI 能力映射：推理与计算 ================= -->
+            <div class="flex-1 overflow-y-auto rounded-2xl relative scroll-smooth pb-8 pr-1 h-full" x-show="currentTab === 'aiMapReasoning'" x-cloak x-transition.opacity.duration.400ms>
+                <div class="flex items-center gap-4 mb-6 shrink-0 pl-2">
+                    <button @click="currentTab = 'dashboard'" class="p-2 hover:bg-white/40 rounded-full transition text-slate-600 border border-transparent hover:border-white/60 shadow-sm" title="返回全局概览">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">推理与计算 <span class="text-base font-medium text-slate-400 align-middle ml-1">· 因果律引擎</span></h1>
+                </div>
+                <div class="glass-card rounded-3xl p-12 text-center max-w-3xl mx-auto">
+                    <span class="inline-flex w-14 h-14 items-center justify-center rounded-2xl bg-purple-50 text-purple-600 text-2xl mb-4"><i class="fa-solid fa-diagram-project"></i></span>
+                    <p class="text-slate-700 font-semibold">此模块界面待开发</p>
+                    <p class="text-xs text-slate-400 mt-2">提供相应的界面信息后，将在此处填充对应内容。</p>
+                </div>
+            </div>
+
+            <!-- ================= AI 能力映射：感知与交互带宽 ================= -->
+            <div class="flex-1 overflow-y-auto rounded-2xl relative scroll-smooth pb-8 pr-1 h-full" x-show="currentTab === 'aiMapPerception'" x-cloak x-transition.opacity.duration.400ms>
+                <div class="flex items-center gap-4 mb-6 shrink-0 pl-2">
+                    <button @click="currentTab = 'dashboard'" class="p-2 hover:bg-white/40 rounded-full transition text-slate-600 border border-transparent hover:border-white/60 shadow-sm" title="返回全局概览">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">感知与交互带宽 <span class="text-base font-medium text-slate-400 align-middle ml-1">· 感官吞吐量</span></h1>
+                </div>
+                <div class="glass-card rounded-3xl p-12 text-center max-w-3xl mx-auto">
+                    <span class="inline-flex w-14 h-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 text-2xl mb-4"><i class="fa-solid fa-eye"></i></span>
+                    <p class="text-slate-700 font-semibold">此模块界面待开发</p>
+                    <p class="text-xs text-slate-400 mt-2">提供相应的界面信息后，将在此处填充对应内容。</p>
+                </div>
+            </div>
+
+            <!-- ================= AI 能力映射：规划与执行 ================= -->
+            <div class="flex-1 overflow-y-auto rounded-2xl relative scroll-smooth pb-8 pr-1 h-full" x-show="currentTab === 'aiMapPlanning'" x-cloak x-transition.opacity.duration.400ms>
+                <div class="flex items-center gap-4 mb-6 shrink-0 pl-2">
+                    <button @click="currentTab = 'dashboard'" class="p-2 hover:bg-white/40 rounded-full transition text-slate-600 border border-transparent hover:border-white/60 shadow-sm" title="返回全局概览">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">规划与执行 <span class="text-base font-medium text-slate-400 align-middle ml-1">· 动态控制中枢</span></h1>
+                </div>
+                <div class="glass-card rounded-3xl p-12 text-center max-w-3xl mx-auto">
+                    <span class="inline-flex w-14 h-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 text-2xl mb-4"><i class="fa-solid fa-route"></i></span>
+                    <p class="text-slate-700 font-semibold">此模块界面待开发</p>
+                    <p class="text-xs text-slate-400 mt-2">提供相应的界面信息后，将在此处填充对应内容。</p>
+                </div>
             </div>
             
         </div>
@@ -3301,8 +3414,11 @@ window.backToToolDetail = function() {
             }
         };
 
-        // ==================== [ 10. 业务模块：AI 能力量化引擎 ] ====================
-        // 注：此模块依赖 Alpine.js 的初始化，为保持上下文一致，统一挂载在文件末尾的 alpine:init 中。
+// ==================== [ 10. 业务模块：AI 能力量化引擎 ] ====================
+// [已废弃] 原「AI 能力量化」（aiRuler 刻度尺组件）已替换为「AI能力量化」聚合卡片模块
+// （位于「控制台概览」Tab 内，4 个卡片分别跳转到 aiMapKnowledge / aiMapReasoning /
+// aiMapPerception / aiMapPlanning 四个 Tab 占位）。
+// 如未来需再启用 aiRuler，请恢复 x-data="aiRuler()" 容器并在此处补充函数定义。
 
         // ==================== [ 11. 业务模块：个人能力标签与集合库 ] ====================
         
@@ -4040,144 +4156,6 @@ window.backToToolDetail = function() {
         }, 100);
 
     }); // <====== DOMContentLoaded 监听器在此闭合 ======
-
-
-    // ==================== [ 10. 业务模块：AI 能力量化引擎 ] ====================
-    // 必须挂载在外部，由 Alpine.js 自身生命周期调度
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('aiRuler', () => ({
-            activeSource: null,
-            activeTarget: null,
-            selectedRulerNode: null,
-            
-            // 导航进度卡片固定在左侧，核心能力描述在右侧
-            leftNodes: [
-                { id: 'rl1', label: '通用综合能力', targetId: 'rr1', color: '#06b6d4', icon: 'fa-globe', desc: '衡量模型跨领域的知识储备、语言理解与指令遵循能力，是最基础的 "总分榜"，覆盖人文、社科、理工、常识等数十个学科，分为客观题测试和对话式评测两类。' },
-                { id: 'rl2', label: '垂直行业能力', targetId: 'rr1', color: '#06b6d4', icon: 'fa-user-tie', desc: '针对特定行业的专业能力评测，更贴近真实产业需求，细分领域非常丰富。' },
-                { id: 'rl3', label: '逻辑与推理能力', targetId: 'rr2', color: '#8b5cf6', icon: 'fa-network-wired', desc: '区分模型智能层级的核心维度，评测模型的逻辑推导、数学运算、因果分析能力，而非单纯的知识记忆。' },
-                { id: 'rl4', label: '代码开发能力', targetId: 'rr2', color: '#8b5cf6', icon: 'fa-code', desc: '产业落地最核心的专项能力之一，评测代码生成、调试、理解、算法设计的水平。' },
-                { id: 'rl5', label: '多模态能力', targetId: 'rr3', color: '#10b981', icon: 'fa-eye', desc: '评测跨模态的理解与生成能力，是当前大模型技术演进的核心方向。' },
-                { id: 'rl6', label: '长上下文能力', targetId: 'rr3', color: '#10b981', icon: 'fa-book-open', desc: '衡量模型处理长文本的信息召回、理解、推理能力，直接决定法律、办公、科研等长文档场景的可用性。' },
-                { id: 'rl7', label: '智能体能力', targetId: 'rr4', color: '#f59e0b', icon: 'fa-robot', desc: '新兴的前沿评测方向，衡量模型自主规划、工具调用、多步执行复杂任务的能力，对应下一代 AI 的核心形态。' },
-                { id: 'rl8', label: '安全与对齐能力', targetId: 'rr4', color: '#f59e0b', icon: 'fa-shield-halved', desc: '评测模型的合规性、价值观对齐、抗风险能力，是模型商用落地的底线要求。' }
-            ],
-
-            rightNodes: [
-                { id: 'rr1', label: '知识与表征', en: 'Knowledge & Representation', shortDesc: '静态记忆库：常识、事实与概念的神经网络权重压缩。', desc: '【知识与表征】代表了模型作为"静态记忆库"的能力。无论是通用常识、唐诗宋词，还是特定行业的法律条文、医学名词，本质上都是信息在神经网络权重中的压缩与提取。它吸收了传统的"通用能力"和"垂直行业能力"，关注的是模型"记住了什么"以及"概念映射的准确性"。', color: '#06b6d4', icon: 'fa-database' },
-                { id: 'rr2', label: '推理与计算', en: 'Reasoning & Computation', shortDesc: '因果律引擎：符号操作、多步逻辑推导与结构化信息处理。', desc: '【推理与计算】是决定模型智能上限的"因果律引擎"。它吸收了"逻辑推导"和"代码能力"。在底层认知框架下，解数学题、写 Python 代码或进行三段论逻辑推导，调用的都是同一种高度抽象的符号操作和因果链构建能力。语法只是表象，严密的逻辑树才是核心。', color: '#8b5cf6', icon: 'fa-microchip' },
-                { id: 'rr3', label: '感知与交互带宽', en: 'Perception & Bandwidth', shortDesc: '感官吞吐量：视觉/听觉输入解析能力与短期工作记忆容量。', desc: '【感知与交互带宽】决定了模型与外界交换信息的"口径"。它整合了"多模态"和"长上下文"能力。这就像给数字大脑装上了眼睛（视觉）、耳朵（听觉）以及极大的短期工作记忆缓存（Context Window）。它本身不产生新的"聪明才智"，但决定了模型一次性能吞咽和解析多大规模的现实世界数据。', color: '#10b981', icon: 'fa-satellite-dish' },
-                { id: 'rr4', label: '规划与执行', en: 'Planning & Execution', shortDesc: '动态控制中枢：复杂目标拆解、状态机流转与外部工具调度。', desc: '【规划与执行】是模型走向"自主数字生命"的关键，它直接对应"Agent/智能体"能力。它超越了被动的知识检索或单次逻辑推导，要求模型能够理解复杂目标，将大任务拆解为子任务栈（Planning），在多步操作中维持当前状态，并懂得在必要时调用外部工具（如计算器、搜索引擎、API），这是一种高阶的系统控制力。', color: '#f59e0b', icon: 'fa-chess-knight' }
-            ],
-
-            init() {
-                setTimeout(() => {
-                    this.drawRulerPaths();
-                }, 500);
-                window.addEventListener('resize', () => {
-                    window.requestAnimationFrame(() => this.drawRulerPaths());
-                });
-            },
-
-            drawRulerPaths() {
-                const svgLayer = document.getElementById('ruler-svg');
-                const container = document.getElementById('ruler-nodes-container');
-                if(!svgLayer || !container) return;
-                svgLayer.innerHTML = '';
-                svgLayer.style.height = `${container.scrollHeight}px`;
-                const containerRect = container.getBoundingClientRect();
-
-                this.leftNodes.forEach((node) => {
-                    const leftEl = document.getElementById(node.id);
-                    const rightEl = document.getElementById(node.targetId);
-                    if(!leftEl || !rightEl) return;
-
-                    const rect1 = leftEl.getBoundingClientRect();
-                    const rect2 = rightEl.getBoundingClientRect();
-
-                    const startX = rect1.right - containerRect.left;
-                    const startY = rect1.top + (rect1.height / 2) - containerRect.top;
-                    const endX = rect2.left - containerRect.left - 10;
-                    const endY = rect2.top + (rect2.height / 2) - containerRect.top;
-
-                    const dx = Math.abs(endX - startX);
-                    const controlX1 = startX + dx * 0.4;
-                    const controlX2 = endX - dx * 0.4;
-                    const pathString = `M ${startX} ${startY} C ${controlX1} ${startY}, ${controlX2} ${endY}, ${endX} ${endY}`;
-
-                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    path.setAttribute("d", pathString);
-                    path.setAttribute("stroke", node.color);
-                    path.setAttribute("class", "ruler-path");
-                    path.setAttribute("data-source", node.id);
-                    path.setAttribute("data-target", node.targetId);
-                    path.style.setProperty('--path-color', node.color);
-
-                    const dotsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                    dotsGroup.setAttribute("class", "ruler-dots");
-
-                    for(let i = 0; i < 3; i++) {
-                        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                        dot.setAttribute("r", "2.5");
-                        dot.setAttribute("class", "ruler-dot");
-                        const animateMotion = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
-                        animateMotion.setAttribute("dur", (2 + Math.random()) + "s");
-                        animateMotion.setAttribute("repeatCount", "indefinite");
-                        animateMotion.setAttribute("path", pathString);
-                        animateMotion.setAttribute("begin", `-${i * 0.8}s`);
-                        dot.appendChild(animateMotion);
-                        dotsGroup.appendChild(dot);
-                    }
-
-                    svgLayer.appendChild(path);
-                    svgLayer.appendChild(dotsGroup);
-                });
-            },
-
-            hoverRulerNode(id, side) {
-                if (side === 'left') {
-                    this.activeSource = id;
-                    this.activeTarget = this.leftNodes.find(n => n.id === id).targetId;
-                } else {
-                    this.activeTarget = id;
-                    this.activeSource = null;
-                }
-                this.updateRulerPathsVisibility();
-            },
-
-            resetRulerHover() {
-                this.activeSource = null;
-                this.activeTarget = null;
-                this.updateRulerPathsVisibility();
-            },
-
-            isRulerDimmed(id, side) {
-                if (!this.activeSource && !this.activeTarget) return false;
-                if (side === 'left') {
-                    if (this.activeSource) return id !== this.activeSource;
-                    return this.leftNodes.find(n => n.id === id).targetId !== this.activeTarget;
-                } else {
-                    return id !== this.activeTarget;
-                }
-            },
-
-            updateRulerPathsVisibility() {
-                const paths = document.querySelectorAll('.ruler-path');
-                const isAnyActive = this.activeSource || this.activeTarget;
-                paths.forEach(p => {
-                    const source = p.getAttribute('data-source');
-                    const target = p.getAttribute('data-target');
-                    p.classList.remove('active-path', 'dimmed-path');
-                    if (isAnyActive) {
-                        const shouldHighlight = 
-                            (this.activeSource && source === this.activeSource) || 
-                            (!this.activeSource && this.activeTarget && target === this.activeTarget);
-                        if (shouldHighlight) p.classList.add('active-path');
-                        else p.classList.add('dimmed-path');
-                    }
-                });
-            }
-        }));
-    });
 </script>
 
     </body>
